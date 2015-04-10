@@ -1,0 +1,9 @@
+{
+  // Required
+  "manifest_version": 2,
+  "name": "/r/LeagueofLegends Broswer Extension",
+  "version": "1.0",
+
+  // Recommended
+  "description": "Adds in op.gg functionality to usernames on /r/leagueoflegends"
+}

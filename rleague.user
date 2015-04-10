@@ -2,14 +2,26 @@
 // @name			rleague-browser-extension
 // @namespace		reddit_league
 // @description		Links summoner names, and makes other small improvements to /r/League.
-// @include			http://*.reddit.com/r/league
-// @include			http://*.reddit.com/r/League
-// @include			http://*.reddit.com/r/league/*
-// @include			http://*.reddit.com/r/League/*
-// @include			https://*.reddit.com/r/league
-// @include			https://*.reddit.com/r/League
-// @include			https://*.reddit.com/r/league/*
-// @include			https://*.reddit.com/r/League/*
+// @include			http://*.reddit.com/r/leagueoflegends
+// @include			http://*.reddit.com/r/LeagueofLegends
+// @include			http://*.reddit.com/r/LeagueOflegends
+// @include			http://*.reddit.com/r/leagueOfLegends
+// @include			http://*.reddit.com/r/LeagueOfLegends
+// @include			http://*.reddit.com/r/leagueoflegends/*
+// @include			http://*.reddit.com/r/LeagueofLegends/*
+// @include			http://*.reddit.com/r/LeagueOflegends/*
+// @include			http://*.reddit.com/r/leagueOfLegends/*
+// @include			http://*.reddit.com/r/LeagueOfLegends/*
+// @include			https://*.reddit.com/r/leagueoflegends
+// @include			https://*.reddit.com/r/LeagueofLegends
+// @include			https://*.reddit.com/r/LeagueOflegends
+// @include			https://*.reddit.com/r/leagueOfLegends
+// @include			https://*.reddit.com/r/LeagueOfLegends
+// @include			https://*.reddit.com/r/leagueoflegends/*
+// @include			https://*.reddit.com/r/LeagueofLegends/*
+// @include			https://*.reddit.com/r/LeagueOflegends/*
+// @include			https://*.reddit.com/r/leagueOfLegends/*
+// @include			https://*.reddit.com/r/LeagueOfLegends/*
 // ==/UserScript==
 
 (function(){
@@ -22,11 +34,12 @@
 	var flairs = document.getElementsByClassName('flair')[0].getAttribute('title');
 	var r, a, profile_url;
 	for (i = flairs.length-1; i >= 0; i--) {
-		if (flairs[i].textContent === "") { continue; }
-
-		if (flairs[i].className.indexOf("NA") !== -1)		{ r = "na"; }
-		else if (flairs[i].className.indexOf("EUW") !== -1)	{ r = "euw"; }
-		else if (flairs[i].className.indexOf("EUNE") !== -1)		{ r = "eune"; }
+		if (flairs[i].textContent === "") {
+			continue;
+		}
+		if (flairs[i].className.indexOf("NA") !== -1)			{ r = "na"; }
+		else if (flairs[i].className.indexOf("EU-W") !== -1)		{ r = "euw"; }
+		else if (flairs[i].className.indexOf("EU-NE") !== -1)	{ r = "eune"; }
 		else if (flairs[i].className.indexOf("LAN") !== -1)		{ r = "lan"; }
 		else if (flairs[i].className.indexOf("TR") !== -1)		{ r = "tr"; }
 		else if (flairs[i].className.indexOf("KR") !== -1)		{ r = "www"; }
@@ -34,7 +47,12 @@
 		else if (flairs[i].className.indexOf("OCE") !== -1)		{ r = "oce"; }
 		else if (flairs[i].className.indexOf("LAS") !== -1)		{ r = "las"; }
 		else if (flairs[i].className.indexOf("RU") !== -1)		{ r = "ru"; }
-		else																		{ continue; }
+		else													{ continue; }
+
+		var m, n;
+		m = flairs[i].indexOf("[");
+		n = flairs[i].indexOf("]");
+		profile_url = flairs[i].substring(m + 1, n - 1);
 
 		a = document.createElement("a");
 		a.textContent = flairs[i].textContent;
